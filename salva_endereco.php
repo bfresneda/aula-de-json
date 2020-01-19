@@ -5,6 +5,7 @@
  if($_GET){
  $cep = $_GET['cep'];
  $numero = $_GET['numero'];
+ $nome = $_GET['nome'];
 
 
  //levantar as informacoes da localidade a partir do cep
@@ -19,6 +20,7 @@ $endereco = json_decode($str,true);
 //adicionando o numero ao array de endereço
 
 $endereco ['numero'] = $numero;
+$endereco ['nome'] = $nome;
 
 // transformar o array associativo $endereco de volta para uma string
 
@@ -47,6 +49,7 @@ file_put_contents('arquivoendereço.json',$str . "\n", FILE_APPEND) ;
 <body>
     
     <form action="" method="get">
+    Digite seu nome: <input type="text" name="nome" id="nome">
     Digite seu cep: <input type="text" name="cep" id="cep">
     Digite o numero: <input type="text" name="numero" id="numero">
     <input type="submit" value="Submit">
@@ -57,7 +60,9 @@ file_put_contents('arquivoendereço.json',$str . "\n", FILE_APPEND) ;
 
 echo('<pre>');
 foreach($endereco as $end){
-    echo "$end \n";}
+    // echo "$end \n";}
+}
+    echo "Eu " . $endereco['nome'] . " moro no endereço " . $endereco["logradouro"]. " Cep " . $endereco['cep'];
 echo('</pre>');
 
 ?>
